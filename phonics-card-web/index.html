@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>五环节英语教学页生成器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="title-block">
+          <p class="eyebrow">Lesson Deck Builder</p>
+          <h1>五环节英语教学页生成器</h1>
+          <p id="lessonTitle" class="lesson-subtitle"></p>
+          <p id="importStatus" class="import-status">当前使用内置示例课程</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-row">
+            <label class="upload-button" for="lessonFile">导入课程文件</label>
+            <input id="lessonFile" class="file-input" type="file" accept=".md,.markdown,.xlsx" />
+            <a class="template-button" href="./templates/lesson-template.md" download>MD 模板</a>
+            <a class="template-button" href="./templates/lesson-template.xlsx" download>XLSX 模板</a>
+            <button id="printButton" class="print-button" type="button">打印</button>
+          </div>
+
+          <div class="toolbar-row">
+            <div class="step-tabs" role="tablist" aria-label="教学环节"></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="lesson-stage" aria-live="polite">
+        <aside class="lesson-panel">
+          <p id="stepLabel" class="step-label"></p>
+          <h2 id="pageTitle" class="page-title"></h2>
+          <p id="pageLead" class="page-lead"></p>
+          <div id="leftHighlights" class="left-highlights"></div>
+        </aside>
+
+        <section class="content-panel">
+          <div class="content-panel-header">
+            <p id="pageMeta"></p>
+            <span id="pageCounter"></span>
+          </div>
+          <div id="contentGrid" class="content-grid"></div>
+        </section>
+      </section>
+
+      <nav class="pager" aria-label="翻页控制">
+        <button id="prevButton" class="pager-button" type="button">上一页</button>
+        <div id="progressDots" class="progress-dots" aria-hidden="true"></div>
+        <button id="nextButton" class="pager-button" type="button">下一页</button>
+      </nav>
+    </main>
+
+    <script src="./xlsx.full.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

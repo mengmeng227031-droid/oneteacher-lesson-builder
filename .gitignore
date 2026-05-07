@@ -1,0 +1,29 @@
+# OS / editor
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Logs / temp
+*.log
+*.tmp
+*.temp
+
+# Local dependencies
+node_modules/
+
+# Generated worksheet artifacts
+pdflatex/pdf/
+pdflatex/preview/*.png
+pdflatex/src/build/
+
+# Browser preview artifacts
+phonics-card-web/preview/
+phonics-card-web2/preview/
+phonics-card-web2/output/
+phonics-ppt-deck/preview/
+phonics-ppt-deck/output/

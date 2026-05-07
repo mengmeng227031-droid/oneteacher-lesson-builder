@@ -1,0 +1,436 @@
+:root {
+  --ink: #1f2c35;
+  --muted: #607484;
+  --red: #e63946;
+  --green: #4f9f84;
+  --blue: #6aa9d8;
+  --yellow: #f6c84f;
+  --paper: rgba(255, 255, 255, 0.94);
+  --line: rgba(91, 126, 148, 0.22);
+  --shadow: 0 18px 52px rgba(40, 60, 80, 0.13);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", "Microsoft YaHei", sans-serif;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.86)),
+    url("./animals-bg.svg"),
+    linear-gradient(135deg, #f3fbff 0%, #f8fbef 48%, #fff3ee 100%);
+  background-size: cover, 720px auto, cover;
+  background-position: center;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.9), transparent 30%),
+    radial-gradient(circle at 82% 25%, rgba(255, 255, 255, 0.84), transparent 32%),
+    radial-gradient(circle at 50% 78%, rgba(255, 255, 255, 0.88), transparent 38%);
+  backdrop-filter: blur(1.6px);
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1240px, calc(100vw - 40px));
+  height: calc(100vh - 40px);
+  margin: 20px auto;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 16px;
+}
+
+.topbar,
+.slide-view,
+.pager {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.topbar {
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--green);
+  font-size: 0.84rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 2.4vw, 2.35rem);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stage-button,
+.print-button,
+.pager-button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(41, 70, 95, 0.1);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+}
+
+.stage-button.active {
+  color: #fff;
+  background: var(--green);
+}
+
+.print-button,
+.pager-button {
+  background: var(--yellow);
+}
+
+.slide-view {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.75fr) minmax(640px, 1.65fr);
+  gap: 18px;
+  padding: 18px;
+}
+
+.phoneme-panel,
+.words-panel {
+  min-height: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.phoneme-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.phoneme-panel::after {
+  content: "";
+  position: absolute;
+  right: -62px;
+  bottom: -70px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(246, 200, 79, 0.22);
+}
+
+.stage-label,
+.section-label,
+.sound-label {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.stage-label {
+  color: var(--blue);
+  font-size: 1.18rem;
+}
+
+.section-label {
+  margin-top: 10px;
+  font-size: 1.05rem;
+}
+
+.phoneme-text {
+  position: relative;
+  z-index: 1;
+  margin: 34px 0;
+  color: var(--red);
+  font-size: clamp(5rem, 13vw, 10rem);
+  font-weight: 900;
+  line-height: 0.9;
+}
+
+.sound-label {
+  font-size: 1.34rem;
+}
+
+.words-panel {
+  padding: 34px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.words-header {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.words-header p,
+.words-header span {
+  margin: 0;
+}
+
+.word-list {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.word-card {
+  min-width: 0;
+  min-height: 0;
+  padding: 22px 30px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  border: 2px solid rgba(106, 169, 216, 0.22);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.word-index {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--blue);
+  font-weight: 900;
+}
+
+.word {
+  min-width: 0;
+  justify-self: end;
+  overflow: visible;
+  white-space: nowrap;
+  font-weight: 900;
+  line-height: 0.95;
+  font-size: clamp(3rem, calc(58rem / var(--chars)), 6.1rem);
+}
+
+.word mark {
+  color: var(--red);
+  background: transparent;
+}
+
+.pager {
+  padding: 12px 18px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.pager-button {
+  min-width: 118px;
+}
+
+.pager-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: rgba(32, 48, 58, 0.18);
+}
+
+.dot.active {
+  background: var(--green);
+}
+
+.print-deck {
+  display: none;
+}
+
+@page {
+  size: 13.333in 7.5in;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    width: auto;
+    height: auto;
+    overflow: visible;
+    background: #fff;
+  }
+
+  body::before,
+  .app-shell {
+    display: none !important;
+  }
+
+  .print-deck {
+    display: block;
+  }
+
+  .print-slide {
+    width: 13.333in;
+    height: 7.5in;
+    page-break-after: always;
+    break-after: page;
+    padding: 0.36in;
+    display: grid;
+    grid-template-columns: 31% 1fr;
+    gap: 0.18in;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.9)),
+      url("./animals-bg.svg"),
+      linear-gradient(135deg, #f5fcff, #fff8ef);
+    background-size: cover, 6in auto, cover;
+    color: var(--ink);
+  }
+
+  .print-phoneme,
+  .print-words {
+    border: 1px solid #d9e4ec;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .print-phoneme {
+    padding: 0.42in;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .print-stage {
+    margin: 0;
+    color: var(--blue);
+    font-size: 16pt;
+    font-weight: 900;
+  }
+
+  .print-section {
+    margin: 0.08in 0 0;
+    color: var(--muted);
+    font-size: 14pt;
+    font-weight: 900;
+  }
+
+  .print-phoneme-text {
+    margin: 0.32in 0;
+    color: var(--red);
+    font-size: 86pt;
+    font-weight: 900;
+    line-height: 0.92;
+  }
+
+  .print-sound {
+    margin: 0;
+    color: var(--muted);
+    font-size: 18pt;
+    font-weight: 900;
+  }
+
+  .print-words {
+    padding: 0.36in;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  .print-header {
+    margin: 0 0 0.18in;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 14pt;
+    font-weight: 900;
+  }
+
+  .print-word-list {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.16in;
+  }
+
+  .print-word-card {
+    padding: 0.14in 0.26in;
+    display: grid;
+    grid-template-columns: 0.46in 1fr;
+    align-items: center;
+    gap: 0.24in;
+    border: 1.6pt solid rgba(106, 169, 216, 0.25);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .print-word-index {
+    width: 0.42in;
+    height: 0.42in;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--blue);
+    font-size: 13pt;
+    font-weight: 900;
+  }
+
+  .print-word {
+    justify-self: end;
+    white-space: nowrap;
+    color: var(--ink);
+    font-size: clamp(30pt, calc(480pt / var(--chars)), 56pt);
+    font-weight: 900;
+    line-height: 0.95;
+  }
+
+  .print-word mark {
+    color: var(--red);
+    background: transparent;
+  }
+}

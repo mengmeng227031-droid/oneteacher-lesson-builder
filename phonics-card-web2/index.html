@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自然拼读全页 PPT</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Phonics Slide Deck</p>
+          <h1>自然拼读三阶段全页 PPT</h1>
+        </div>
+        <div class="toolbar">
+          <button class="stage-button active" type="button" data-stage="all">全部</button>
+          <button class="stage-button" type="button" data-stage="1">阶段一</button>
+          <button class="stage-button" type="button" data-stage="2">阶段二</button>
+          <button class="stage-button" type="button" data-stage="3">阶段三</button>
+          <button id="printButton" class="print-button" type="button">PDF 全部页</button>
+        </div>
+      </header>
+
+      <section class="slide-view" aria-live="polite">
+        <aside class="phoneme-panel">
+          <p id="stageLabel" class="stage-label"></p>
+          <p id="sectionLabel" class="section-label"></p>
+          <div id="phonemeText" class="phoneme-text"></div>
+          <p id="soundLabel" class="sound-label"></p>
+        </aside>
+
+        <section class="words-panel">
+          <div class="words-header">
+            <p>三个例词</p>
+            <span id="pageCounter"></span>
+          </div>
+          <div id="wordList" class="word-list"></div>
+        </section>
+      </section>
+
+      <nav class="pager">
+        <button id="prevButton" class="pager-button" type="button">上一页</button>
+        <div id="progressDots" class="progress-dots" aria-hidden="true"></div>
+        <button id="nextButton" class="pager-button" type="button">下一页</button>
+      </nav>
+    </main>
+
+    <section id="printDeck" class="print-deck" aria-hidden="true"></section>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
